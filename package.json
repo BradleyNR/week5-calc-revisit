@@ -6,6 +6,9 @@
   "devDependencies": {
     "git-directory-deploy": "^1.4.0",
     "autoprefixer": "^6.3.3",
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^7.3.0",
     "browserify-shim": "^3.8.12",
     "postcss-cli": "^2.5.1",
     "node-sass": "^3.4.2",
@@ -22,33 +25,33 @@
     "jquery": "^2.2.0",
     "underscore": "^1.8.3"
     , "bootstrap-sass": "^3.3.6"
-    
-    , "handlebars": "^4.0.5"
+
+   , "handlebars": "^4.0.5"
     , "hbsfy": "^2.5.1"
-    
-    
-    
-  },
+
+
+
+ },
   "scripts": {
     "html": "cp app/*.html dist/",
     "fonts": "cp -r app/fonts/ dist/fonts/",
     "scss": "sass --style compressed --update app/styles:dist/css",
     "autoprefixer": "postcss -u autoprefixer -r dist/css/*.css",
 
-    "lint": "eslint app/scripts",
+   "lint": "eslint app/scripts",
     "browserify": "browserify app/scripts/index.js | uglifyjs -c > dist/js/bundle.js",
 
-    "imagemin": "imagemin app/images dist/images -p",
+   "imagemin": "imagemin app/images dist/images -p",
     "favicon": "cp app/favicon.ico dist/",
 
-    "build:css": "npm run scss && npm run autoprefixer",
+   "build:css": "npm run scss && npm run autoprefixer",
     "build:js": "npm run lint && npm run browserify",
     "build:images": "npm run imagemin && npm run favicon",
     "build": "npm run html && npm run fonts && npm run build:css && npm run build:js && npm run build:images",
 
-    "deploy": "npm run build && git-directory-deploy --directory dist/",
+   "deploy": "npm run build && git-directory-deploy --directory dist/",
 
-    "watch:scss": "sass --watch app/styles:dist/css",
+   "watch:scss": "sass --watch app/styles:dist/css",
     "watch:js": "watchify app/scripts/index.js -o dist/js/bundle.js",
     "watch:html": "onchange 'app/**/*.html' -- npm run html",
     "watch:images": "onchange 'app/images/*' -- npm run build:images",
@@ -58,10 +61,18 @@
   },
   "browserify": {
     "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ],
       "browserify-shim",
       "hbsfy",
-      
-      "strictify"
+
+     "strictify"
     ]
   },
   "browserify-shim": {
