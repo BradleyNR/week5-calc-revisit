@@ -3,6 +3,9 @@
   "engines": {
     "node": ">=0.10.0"
   },
+  "jshintConfig": {
+    "esversion": 6
+  },
   "devDependencies": {
     "git-directory-deploy": "^1.4.0",
     "autoprefixer": "^6.3.3",
