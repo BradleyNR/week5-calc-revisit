@@ -5781,4 +5781,8 @@ button {
   background-color: #80d6ff; }
   .clearbutton:active {
     background-color: #42a5f5; }
+
+.answer-area {
+  height: 50px; }
+
 /*# sourceMappingURL=app.css.map */
